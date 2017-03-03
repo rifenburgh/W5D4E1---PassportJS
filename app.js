@@ -14,6 +14,7 @@ const session         = require('express-session');
 const bcrypt          = require('bcrypt');
 const User            = require('./models/user-model.js');
 const flash           = require('connect-flash');
+require('dotenv').config();
 
 
 mongoose.connect('mongodb://localhost/passport-app');
@@ -81,17 +82,17 @@ passport.use(new LocalStrategy((username, password, next) => { //this 'next' is 
 
 //Facebook Passport Strategy
 //This solution does not save Facebook details in the local session database
-passport.use(new FbStrategy({
-clientID: '',
-clientSecret: '',
-callbackURL: 'http://localhost:3000/auth/facebook/callback'
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
+// passport.use(new FbStrategy({
+// clientID: '',
+// clientSecret: '',
+// callbackURL: process.env.HOST_ADDRESS + '/auth/facebook/callback'
+// }, (accessToken, refreshToken, profile, done) => {
+//   done(null, profile);
+// }));
 passport.use(new GoogleStrategy({
-clientID: '-.apps.googleusercontent.com',
-clientSecret: '',
-callbackURL: 'http://localhost:3000/auth/google/callback'
+clientID: process.env.GOOGLE_CLIENT_ID,
+clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+callbackURL: process.env.GOOGLE_HOST + '/auth/google/callback'
 }, (accessToken, refreshToken, profile, done) => {
   done(null, profile);
 }));
