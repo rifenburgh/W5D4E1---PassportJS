@@ -1,0 +1,11 @@
+<h1>Add New Rooms</h1>
+<form action="/rooms" method="post" enctype="multipart/form-data">
+  <% if(message) { %>
+    <p class="success"> <%= message %></p>
+  <% } %>
+  <input type="text" name="name" placeholder="Name">
+  <input type="text" name="desc" placeholder="Description">
+  <input type="text" name="owner" placeholder="Owner">
+  <input type="file" name="picture" placeholder="Room Picture">
+  <button type="submit" class="">Create Room</button>
+</form>
